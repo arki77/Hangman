@@ -38,6 +38,7 @@ heart = 10
 GameStatus, settings = False, False
 
 while True:
+	settings_file = readJson(r'wisielec\settings.json')
 	os.system('cls')
 	print('Hey, in hangman game! \n[1] Roll random Slogan\n[2] Settings\n[3] Exit')
 	choice = input('..')
@@ -46,10 +47,10 @@ while True:
 		os.system('cls')
 		print('Random slogan rolling...')
 		time.sleep(1)
+		heart = settings_file["tries"]
 		GameStatus = True
 	elif choice == '2':
 		settings = True
-		settings_file = readJson(r'wisielec\settings.json')
 		while settings:
 			os.system('cls')
 			print('SETTINGS MENU')
@@ -104,11 +105,15 @@ while True:
 					print(f'You lose!\nGuessed word is `{guessWord}`')
 					input('')
 					GameStatus = False
+					usedLetter = []
+					info = ''
 			else:
 				os.system('cls')
 				print(f'Congrats You WIN!\nGuessed word is `{guessWord}`')
 				input('')
 				GameStatus = False
+				usedLetter = []
+				info = ''
 		else:
 			info = 'You can use one letter!'
 
